@@ -1,27 +1,57 @@
 package com.bikesrentalapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.vladmihalcea.hibernate.type.array.StringArrayType;
+import com.vladmihalcea.hibernate.type.json.JsonType;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+
+import javax.persistence.*;
 import java.util.List;
 
+@Entity(name = "bikes")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@TypeDefs({
+    @TypeDef(
+            name = "string-array",
+            typeClass = StringArrayType.class
+    )
+})
 public class Bike {
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long bike_id;
+
+    @Lob
+    @Type(type="org.hibernate.type.BinaryType")
+    private byte[] picture;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bike", fetch = FetchType.EAGER)
+    private List<BookedDates> bookedDates;
+
+    @Type( type = "string-array" )
+    private String[] reviews;
+
+    @Type( type = "string-array" )
+    private String[] gear;
+
     private String name;
     private String description;
     private Float price;
     private String type;
     private String size;
-    private List<BookedDates> bookedDates;
-    private List<String> reviews;
-    private Number rating;
-    private List<String> gear;
     private String status;
-//    private Blob picture;
+    private int rating;
 
-    public String getId() {
-        return id;
+    public Bike() {}
+
+    public Long getBike_id() {
+        return bike_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setBike_id(Long bike_id) {
+        this.bike_id = bike_id;
     }
 
     public String getName() {
@@ -64,6 +94,14 @@ public class Bike {
         this.size = size;
     }
 
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
+    }
+
     public List<BookedDates> getBookedDates() {
         return bookedDates;
     }
@@ -72,27 +110,27 @@ public class Bike {
         this.bookedDates = bookedDates;
     }
 
-    public List<String> getReviews() {
+    public String[] getReviews() {
         return reviews;
     }
 
-    public void setReviews(List<String> reviews) {
+    public void setReviews(String[] reviews) {
         this.reviews = reviews;
     }
 
-    public Number getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(Number rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
-    public List<String> getGear() {
+    public String[] getGear() {
         return gear;
     }
 
-    public void setGear(List<String> gear) {
+    public void setGear(String[] gear) {
         this.gear = gear;
     }
 
