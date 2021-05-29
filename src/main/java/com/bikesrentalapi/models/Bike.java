@@ -21,7 +21,7 @@ import java.util.List;
 public class Bike {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bike_id;
+    private Long id;
 
     @Lob
     @Type(type="org.hibernate.type.BinaryType")
@@ -48,12 +48,12 @@ public class Bike {
 
     public Bike() {}
 
-    public Long getBike_id() {
-        return bike_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setBike_id(Long bike_id) {
-        this.bike_id = bike_id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
