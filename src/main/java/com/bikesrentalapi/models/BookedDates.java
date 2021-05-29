@@ -17,7 +17,7 @@ public class BookedDates {
     @Column(name="date_end")
     private String dateEnd;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "bike_id")
 //    @JoinTable(
 //            name = "bikes_booked_dates",

@@ -29,7 +29,7 @@ public class Bike {
 
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bike", fetch = FetchType.EAGER)
     @Column(name="booked_dates")
-    @OneToMany(mappedBy = "bike", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "bike", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<BookedDates> bookedDates = new ArrayList<>();
 
     @Type( type = "string-array" )
