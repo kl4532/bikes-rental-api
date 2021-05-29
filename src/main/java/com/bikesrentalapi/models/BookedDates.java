@@ -11,14 +11,18 @@ public class BookedDates {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long booked_date_id;
+
+    @Column(name="date_start")
     private String dateStart;
+    @Column(name="date_end")
     private String dateEnd;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "bikes_booked_dates",
-            joinColumns = @JoinColumn(name = "bike_id"),
-            inverseJoinColumns = @JoinColumn(name = "booked_date_id"))
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "bike_id")
+//    @JoinTable(
+//            name = "bikes_booked_dates",
+//            joinColumns = @JoinColumn(name = "bike_id"),
+//            inverseJoinColumns = @JoinColumn(name = "booked_date_id"))
     @JsonIgnore
     private Bike bike;
 

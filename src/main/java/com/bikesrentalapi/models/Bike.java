@@ -7,6 +7,7 @@ import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "bikes")
@@ -26,8 +27,10 @@ public class Bike {
     @Type(type="org.hibernate.type.BinaryType")
     private byte[] picture;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bike", fetch = FetchType.EAGER)
-    private List<BookedDates> bookedDates;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bike", fetch = FetchType.EAGER)
+    @Column(name="booked_dates")
+    @OneToMany(mappedBy = "bike", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<BookedDates> bookedDates = new ArrayList<>();
 
     @Type( type = "string-array" )
     private String[] reviews;
