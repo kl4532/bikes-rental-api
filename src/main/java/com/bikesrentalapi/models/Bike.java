@@ -27,7 +27,6 @@ public class Bike {
     @Type(type="org.hibernate.type.BinaryType")
     private byte[] picture;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bike", fetch = FetchType.EAGER)
     @Column(name="booked_dates")
     @OneToMany(mappedBy = "bike", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<BookedDates> bookedDates = new ArrayList<>();

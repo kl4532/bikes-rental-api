@@ -25,6 +25,7 @@ public class BikesController {
 
     @PostMapping
     public Bike create(@RequestBody final Bike bike) {
+        System.out.println(bike.getBookedDates().toString());
         return bikeRepository.saveAndFlush(bike);
     }
 

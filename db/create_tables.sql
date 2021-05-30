@@ -28,7 +28,7 @@ create table booked_dates
             primary key,
     date_start     varchar(55) not null,
     date_end       varchar(55) not null,
-    bike_id        integer     not null
+    bike_id        integer
         constraint id_fkey
             references bikes
 );
