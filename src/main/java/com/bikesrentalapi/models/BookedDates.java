@@ -19,10 +19,6 @@ public class BookedDates {
 
     @ManyToOne
     @JoinColumn(name = "bike_id")
-//    @JoinTable(
-//            name = "bikes_booked_dates",
-//            joinColumns = @JoinColumn(name = "bike_id"),
-//            inverseJoinColumns = @JoinColumn(name = "booked_date_id"))
     @JsonIgnore
     private Bike bike;
 
