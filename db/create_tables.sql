@@ -23,35 +23,19 @@ create table bikes
 
 create table booked_dates
 (
+    bike_id        integer
+        constraint id_fkey
+            references bikes,
     booked_date_id serial      not null
         constraint booked_dates_pk
             primary key,
     date_start     varchar(55) not null,
-    date_end       varchar(55) not null,
-    bike_id        integer
-        constraint id_fkey
-            references bikes
+    date_end       varchar(55) not null
+
 );
 
 alter table booked_dates
     owner to postgres;
-
-
--- create table bikes_booked_dates
--- (
---     bike_id        integer not null
---         constraint bikes_booked_dates_bike_id_fkey
---             references bikes,
---     booked_date_id integer not null
---         constraint bikes_booked_dates_booked_date_id_fkey
---             references booked_dates
--- );
-
--- alter table bikes_booked_dates
---     owner to postgres;
-
--- create unique index bikes_booked_dates_id_uindex
---     on booked_dates (booked_date_id);
 
 
 

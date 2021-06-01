@@ -22,6 +22,9 @@ public class BookedDates {
     @JsonIgnore
     private Bike bike;
 
+    @Column(insertable = false, updatable = false)
+    private Long bike_id;
+
     public BookedDates() {}
 
     public Long getBooked_date_id() {

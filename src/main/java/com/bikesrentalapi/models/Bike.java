@@ -28,7 +28,8 @@ public class Bike {
     private byte[] picture;
 
     @Column(name="booked_dates")
-    @OneToMany(mappedBy = "bike", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "bike", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+
     private List<BookedDates> bookedDates = new ArrayList<>();
 
     @Type( type = "string-array" )
