@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -17,18 +18,23 @@ public class BikesController {
     @Autowired
     private BikeRepository bikeRepository;
 
+    @CrossOrigin
     @GetMapping
     public List<Bike> list() {
         return bikeRepository.findAll();
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public Bike get(@PathVariable("id") Long id) {
         return bikeRepository.getById(id);
     }
 
+    @CrossOrigin
     @PostMapping
     public Bike create(@RequestBody final Bike bike) {
+        System.out.println(Arrays.toString(bike.getPicture()));
+
         List<BookedDates> bookedDates = bike.getBookedDates();
         for (BookedDates bd : bookedDates) {
             bd.setBike(bike);
@@ -36,12 +42,14 @@ public class BikesController {
         return bikeRepository.saveAndFlush(bike);
     }
 
+    @CrossOrigin
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable Long id) {
         bikeRepository.deleteBookedDates(id);
         bikeRepository.deleteById(id);
     }
 
+    @CrossOrigin
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
     public Bike update(@PathVariable Long id, @RequestBody Bike bike) throws Exception {
         Bike bikeExisting = bikeRepository.findById(id)
