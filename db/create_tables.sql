@@ -1,9 +1,8 @@
 -- run script in postgres: psql -U postgres -d Bikes_rental -a -f create_tables.sql
 -- or in docker postgres container:  docker exec -i <db_name> mysql -u<user> -p<pswd> < create_tables.sql
 
-drop table if exists bikes;
-drop table if exists booked_dates;
-drop table if exists bikes_booked_dates;
+drop table if exists bikes cascade;
+drop table if exists booked_dates cascade;
 
 create table bikes
 (
