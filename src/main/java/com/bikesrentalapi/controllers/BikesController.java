@@ -5,11 +5,10 @@ import com.bikesrentalapi.models.BookedDates;
 import com.bikesrentalapi.repositories.BikeRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -31,14 +30,16 @@ public class BikesController {
     }
 
     @CrossOrigin
-    @PostMapping
-    public Bike create(@RequestBody final Bike bike) {
-        System.out.println(Arrays.toString(bike.getPicture()));
+    @PostMapping(consumes = {"multipart/form-data"})
+    public Bike create(@RequestParam(value = "picture") MultipartFile picture, @RequestPart("bike") Bike bike) throws IOException {
+        //TODO handle no-picture case
+        bike.setPicture(picture);
 
         List<BookedDates> bookedDates = bike.getBookedDates();
         for (BookedDates bd : bookedDates) {
             bd.setBike(bike);
         }
+        System.out.println("Bike created with a name: " + bike.getName());
         return bikeRepository.saveAndFlush(bike);
     }
 

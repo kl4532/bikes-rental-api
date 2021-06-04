@@ -5,8 +5,10 @@ import com.vladmihalcea.hibernate.type.array.StringArrayType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class Bike {
 
     @Lob
     @Type(type="org.hibernate.type.BinaryType")
+    @Column(name="picture")
     private byte[] picture;
 
     @Column(name="booked_dates")
@@ -47,6 +50,14 @@ public class Bike {
     private int rating;
 
     public Bike() {}
+
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public void setPicture(MultipartFile picture) throws IOException {
+        this.picture = picture.getBytes();
+    }
 
     public Long getId() {
         return id;
@@ -94,14 +105,6 @@ public class Bike {
 
     public void setSize(String size) {
         this.size = size;
-    }
-
-    public byte[] getPicture() {
-        return picture;
-    }
-
-    public void setPicture(byte[] picture) {
-        this.picture = picture;
     }
 
     public List<BookedDates> getBookedDates() {
