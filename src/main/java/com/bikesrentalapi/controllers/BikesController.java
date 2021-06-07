@@ -31,9 +31,10 @@ public class BikesController {
 
     @CrossOrigin
     @PostMapping(consumes = {"multipart/form-data"})
-    public Bike create(@RequestParam(value = "picture") MultipartFile picture, @RequestPart("bike") Bike bike) throws IOException {
-        //TODO handle no-picture case
-        bike.setPicture(picture);
+    public Bike create(@RequestParam(value = "picture", required = false) MultipartFile picture, @RequestPart("bike") Bike bike) throws IOException {
+        if (picture != null) {
+            bike.setPicture(picture);
+        }
 
         List<BookedDates> bookedDates = bike.getBookedDates();
         for (BookedDates bd : bookedDates) {
