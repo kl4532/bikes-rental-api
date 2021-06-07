@@ -47,8 +47,13 @@ public class BikesController {
     @CrossOrigin
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable Long id) {
-        bikeRepository.deleteBookedDates(id);
-        bikeRepository.deleteById(id);
+        try {
+            bikeRepository.deleteBookedDates(id);
+            bikeRepository.deleteById(id);
+            System.out.println("Removed bike with id: " + id);
+        } catch (Exception e) {
+            System.out.println("An error when removing bike with id: " + id);
+        }
     }
 
     @CrossOrigin
