@@ -57,10 +57,15 @@ public class BikesController {
     }
 
     @CrossOrigin
-    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-    public Bike update(@PathVariable Long id, @RequestBody Bike bike) throws Exception {
+    @RequestMapping(value = "{id}", method = RequestMethod.PUT, consumes = {"multipart/form-data"})
+    public Bike update(@PathVariable Long id, @RequestPart Bike bike, @RequestParam(value = "picture", required = false) MultipartFile picture) throws Exception {
         Bike bikeExisting = bikeRepository.findById(id)
                 .orElseThrow(() -> new Exception("Bike with id: " + id + "not found"));
+
+        if (picture != null) {
+            bike.setPicture(picture);
+        }
+
         List<BookedDates> bookedDates = bike.getBookedDates();
         for (BookedDates bd : bookedDates) {
             bd.setBike(bike);
