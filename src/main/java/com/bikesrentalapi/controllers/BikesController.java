@@ -1,7 +1,7 @@
 package com.bikesrentalapi.controllers;
 
-import com.bikesrentalapi.models.Bike;
-import com.bikesrentalapi.models.BookedDates;
+import com.bikesrentalapi.models.entities.Bike;
+import com.bikesrentalapi.models.entities.BookedDates;
 import com.bikesrentalapi.repositories.BikeRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

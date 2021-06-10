@@ -1,4 +1,4 @@
-package com.bikesrentalapi.models;
+package com.bikesrentalapi.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

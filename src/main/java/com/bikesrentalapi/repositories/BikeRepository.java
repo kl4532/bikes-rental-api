@@ -1,6 +1,6 @@
 package com.bikesrentalapi.repositories;
 
-import com.bikesrentalapi.models.Bike;
+import com.bikesrentalapi.models.entities.Bike;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
