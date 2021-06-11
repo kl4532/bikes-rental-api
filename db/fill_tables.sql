@@ -11,8 +11,8 @@ VALUES (1, null,'Romet Aspre','Quite fast gravel bike. Enjoy the speed!', 23.5,'
        (10, null,'Merida Turbo','Speed race', 22, 'road','S', null, null, 3, '{wheels, breaks}', 'available'),
        (11, null,'Mock KTM','High tech inventory. Blabla', 32, 'electric','M', null, null, 3, '{battery}', 'available');
 
-INSERT INTO booked_dates (bike_id, booked_date_id, date_start, date_end)
-VALUES (1, 0, 'Thu Jun 17 2021 00:00:00 GMT+0200', 'Wed Jun 23 2021 00:00:00 GMT+0200'),
+INSERT INTO booked_dates (id, bike_id, date_start, date_end)
+VALUES (0, 1, 'Thu Jun 17 2021 00:00:00 GMT+0200', 'Wed Jun 23 2021 00:00:00 GMT+0200'),
        (1, 1, 'Mon Jun 21 2021 00:00:00 GMT+0200', 'Fri Jun 25 2021 00:00:00 GMT+0200'),
        (2, 2, 'Fri Jun 18 2021 00:00:00 GMT+0200', 'Sun Jun 20 2021 00:00:00 GMT+0200'),
        (3, 3, 'Mon Jun 21 2021 00:00:00 GMT+0200', 'Fri Jun 25 2021 00:00:00 GMT+0200');
