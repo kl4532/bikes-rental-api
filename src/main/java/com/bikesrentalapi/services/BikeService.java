@@ -1,37 +1,24 @@
-package com.bikesrentalapi.controllers;
+package com.bikesrentalapi.services;
 
 import com.bikesrentalapi.models.entities.Bike;
 import com.bikesrentalapi.models.entities.BookedDates;
 import com.bikesrentalapi.repositories.BikeRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/v1/bikes")
-public class BikesController {
+@Service
+@Transactional
+public class BikeService {
     @Autowired
     private BikeRepository bikeRepository;
 
-    @CrossOrigin
-    @GetMapping
-    public List<Bike> list() {
-        return bikeRepository.findAll();
-    }
-
-    @CrossOrigin
-    @GetMapping("/{id}")
-    public Bike get(@PathVariable("id") Long id) {
-        return bikeRepository.getById(id);
-    }
-
-    @CrossOrigin
-    @PostMapping(consumes = {"multipart/form-data"})
-    public Bike create(@RequestParam(value = "picture", required = false) MultipartFile picture, @RequestPart("bike") Bike bike) throws IOException {
+    public Bike createBike(MultipartFile picture, Bike bike) throws IOException {
         if (picture != null) {
             bike.setPicture(picture);
         }
@@ -44,9 +31,7 @@ public class BikesController {
         return bikeRepository.saveAndFlush(bike);
     }
 
-    @CrossOrigin
-    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable Long id) {
+    public void deleteBike(Long id) {
         try {
             bikeRepository.deleteBookedDates(id);
             bikeRepository.deleteById(id);
@@ -56,9 +41,7 @@ public class BikesController {
         }
     }
 
-    @CrossOrigin
-    @RequestMapping(value = "{id}", method = RequestMethod.PUT, consumes = {"multipart/form-data"})
-    public Bike update(@PathVariable Long id, @RequestPart Bike bike, @RequestParam(value = "picture", required = false) MultipartFile picture) throws Exception {
+    public Bike updateBike(Long id, Bike bike, MultipartFile picture) throws Exception {
         Bike bikeExisting = bikeRepository.findById(id)
                 .orElseThrow(() -> new Exception("Bike with id: " + id + "not found"));
 
