@@ -10,10 +10,11 @@ import javax.persistence.*;
 public class BookedDates {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long booked_date_id;
+    private Long id;
 
     @Column(name="date_start")
     private String dateStart;
+
     @Column(name="date_end")
     private String dateEnd;
 
@@ -22,17 +23,17 @@ public class BookedDates {
     @JsonIgnore
     private Bike bike;
 
-    @Column(insertable = false, updatable = false)
-    private Long bike_id;
+    @Column(name="bike_id", insertable = false, updatable = false)
+    private Long bikeId;
 
     public BookedDates() {}
 
-    public Long getBooked_date_id() {
-        return booked_date_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setBooked_date_id(Long booked_date_id) {
-        this.booked_date_id = booked_date_id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDateStart() {
