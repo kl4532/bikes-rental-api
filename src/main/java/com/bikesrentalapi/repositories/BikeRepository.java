@@ -11,6 +11,6 @@ public interface BikeRepository extends JpaRepository<Bike, Long> {
 
     @Transactional
     @Modifying
-    @Query("delete from booked_dates bd where bd.bike_id = ?1")
+    @Query("delete from booked_dates bd where bd.bikeId = ?1")
     void deleteBookedDates(Long id);
 }
