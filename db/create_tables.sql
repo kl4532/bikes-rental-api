@@ -62,7 +62,23 @@ alter table users
 create unique index users_id_uindex
     on users (id);
 
+-- auto-generated definition
+create table orders
+(
+    id           serial  not null
+        constraint orders_pk
+            primary key,
+    user_id    integer
+        constraint id_fkey
+            references bikes,
+    booked_dates json    not null
+);
 
+alter table orders
+    owner to postgres;
+
+create unique index orders_id_uindex
+    on orders (id);
 
 
 
