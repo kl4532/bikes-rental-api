@@ -28,6 +28,10 @@ public class BookedDates {
 
     public BookedDates() {}
 
+    public Long getBikeId() {
+        return bikeId;
+    }
+
     public Long getId() {
         return id;
     }

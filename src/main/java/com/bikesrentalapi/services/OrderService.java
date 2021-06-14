@@ -1,9 +1,11 @@
 package com.bikesrentalapi.services;
 
 import com.bikesrentalapi.models.OrderRaw;
+import com.bikesrentalapi.models.entities.Bike;
 import com.bikesrentalapi.models.entities.BookedDates;
 import com.bikesrentalapi.models.entities.Order;
 import com.bikesrentalapi.models.entities.User;
+import com.bikesrentalapi.repositories.BikeRepository;
 import com.bikesrentalapi.repositories.OrderRepository;
 import com.bikesrentalapi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +22,22 @@ public class OrderService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private BikeRepository bikeRepository;
+    @Autowired
     private UserService userService;
 
     public Order createOrder(OrderRaw rawOrder) {
         Order order = new Order();
         User user = rawOrder.getUser();
-        List<BookedDates> bd = rawOrder.getBookedDates();
-        order.setBookedDates(bd);
+
+        List<BookedDates> bookedDates = rawOrder.getBookedDates();
+
+        for (BookedDates bd: bookedDates) {
+            Bike bike = bikeRepository.getById(bd.getBikeId());
+            bd.setBike(bike);
+        }
+        order.setBookedDates(bookedDates);
+
 
         if (user.getId() > 0) {
             order.setUserId(user.getId());
@@ -35,6 +46,13 @@ public class OrderService {
             order.setUserId(newUser.getId());
         }
 
-        return orderRepository.saveAndFlush(order);
+        try {
+            order = orderRepository.saveAndFlush(order);
+            System.out.println("Order created successfully with id: " + order.getId());
+            return order;
+        } catch (Exception e) {
+            System.out.println("Error when creating order: " + e);
+            return  null;
+        }
     }
 }
