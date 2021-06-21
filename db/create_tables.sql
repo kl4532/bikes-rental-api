@@ -70,7 +70,7 @@ create table orders
             primary key,
     user_id    integer
         constraint id_fkey
-            references bikes,
+            references users,
     booked_dates json
 );
 
@@ -79,6 +79,7 @@ alter table orders
 
 create unique index orders_id_uindex
     on orders (id);
+
 
 
 
