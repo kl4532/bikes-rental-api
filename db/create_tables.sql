@@ -71,7 +71,7 @@ create table orders
     user_id    integer
         constraint id_fkey
             references bikes,
-    booked_dates json    not null
+    booked_dates json
 );
 
 alter table orders
