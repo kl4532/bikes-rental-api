@@ -80,6 +80,25 @@ alter table orders
 create unique index orders_id_uindex
     on orders (id);
 
+-- auto-generated definition
+create table admins
+(
+    id       serial not null
+        constraint admins_pk
+            primary key,
+    login    varchar(25),
+    password varchar(55),
+    email    varchar(55)
+);
+
+alter table admins
+    owner to postgres;
+
+create unique index admins_id_uindex
+    on admins (id);
+
+create unique index admins_login_uindex
+    on admins (login);
 
 
 
