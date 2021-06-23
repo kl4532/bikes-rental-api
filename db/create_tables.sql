@@ -5,6 +5,7 @@ drop table if exists bikes cascade;
 drop table if exists booked_dates cascade;
 drop table if exists users cascade;
 drop table if exists orders cascade;
+drop table if exists admins cascade;
 
 create table bikes
 (
@@ -99,6 +100,9 @@ create unique index admins_id_uindex
 
 create unique index admins_login_uindex
     on admins (login);
+
+INSERT INTO admins (id, login, password, email)
+VALUES (0, 'admin', 'admin', 'iam@the.boss');
 
 
 
