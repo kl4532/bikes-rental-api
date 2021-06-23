@@ -1,7 +1,7 @@
 package com.bikesrentalapi.controllers;
 
 import com.bikesrentalapi.models.entities.Admin;
-import com.bikesrentalapi.repositories.admin.AdminRepository;
+import com.bikesrentalapi.repositories.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +12,9 @@ public class AdminController {
     private AdminRepository adminRepository;
 
     @CrossOrigin
-    @GetMapping("/{login}")
-    public Admin get(@PathVariable("login") String login) {
+    @GetMapping("/login/{login}")
+    public Admin isAdmin(@PathVariable("login") String login) {
+
         return adminRepository.getAdminByLogin(login);
     }
 
