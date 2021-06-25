@@ -1,21 +1,21 @@
 package com.bikesrentalapi.controllers;
 
-import com.bikesrentalapi.models.entities.Admin;
-import com.bikesrentalapi.repositories.AdminRepository;
+import com.bikesrentalapi.models.Credentials;
+import com.bikesrentalapi.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/admins")
 public class AdminController {
     @Autowired
-    private AdminRepository adminRepository;
+    private AdminService adminService;
 
     @CrossOrigin
-    @GetMapping("/login/{login}")
-    public Admin isAdmin(@PathVariable("login") String login) {
-
-        return adminRepository.getAdminByLogin(login);
+    @PostMapping(value = "/login", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Boolean login(@RequestBody Credentials credentials) {
+        return adminService.isAdmin(credentials);
     }
 
 }
