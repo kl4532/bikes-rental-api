@@ -104,5 +104,21 @@ create unique index admins_login_uindex
 INSERT INTO admins (id, login, password, email)
 VALUES (0, 'admin', 'admin', 'iam@the.boss');
 
+-- auto-generated definition
+create table bike_details
+(
+    id     serial      not null
+        constraint bike_details_pk
+            primary key,
+    name   varchar(11) not null,
+    values text[]      not null
+);
+
+alter table bike_details
+    owner to postgres;
+
+create unique index bike_details_id_uindex
+    on bike_details (id);
+
 
 
