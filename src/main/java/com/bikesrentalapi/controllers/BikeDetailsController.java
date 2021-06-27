@@ -1,11 +1,8 @@
 package com.bikesrentalapi.controllers;
 
-import com.bikesrentalapi.models.OrderRaw;
 import com.bikesrentalapi.models.entities.BikeDetails;
-import com.bikesrentalapi.models.entities.Order;
+import com.bikesrentalapi.models.entities.BikeFormFields;
 import com.bikesrentalapi.repositories.BikeDetailsRepository;
-import com.bikesrentalapi.repositories.OrderRepository;
-import com.bikesrentalapi.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +17,14 @@ public class BikeDetailsController {
 
     @CrossOrigin
     @GetMapping
-    public List<BikeDetails> getAllDetails() {
-        return bdRepository.findAll();
+    public BikeFormFields getAllDetails() {
+        List<BikeDetails> bikeDetails = bdRepository.findAll();
+
+        BikeFormFields bff =  new BikeFormFields();
+        bff.setType(bikeDetails.get(0).getValues());
+        bff.setSize(bikeDetails.get(1).getValues());
+        bff.setStatus(bikeDetails.get(2).getValues());
+        return bff;
     }
 
     @CrossOrigin
